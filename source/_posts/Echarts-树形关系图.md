@@ -1,14 +1,19 @@
 ---
-title: Echarts-树形关系图
-date: 2021-03-28 13:35:42
+abbrlink: ''
+categories:
+- 前端
 cover: https://jsd.onmicrosoft.cn/gh/LuckyTiger12138/images//img/202311122010771.png
+date: '2021-03-28T13:35:42+08:00'
+tags:
+- Echarts
+- 前端
+title: Echarts-树形关系图
 top_img: https://jsd.onmicrosoft.cn/gh/LuckyTiger12138/images//img/202311101346217.webp
-tags: ["Echarts","前端"]
-categories: ["前端"]
+updated: '2024-11-07T11:52:55.595+08:00'
 ---
 # Echarts
 
-## 1.点击事件
+## 1.点击事件1
 
 ```javascript
 ECharts 点击事件的 param参数
@@ -85,11 +90,11 @@ ChartEl.on("click", function (param) {
 
             var dataindexParent=param.treeAncestors[2].dataIndex
                 console.log(dataindexParent) //得到父级的dataindex
-                
+              
                 console.log(ChartEl._chartsViews[0]._data._rawData._data[dataindexParent])
 		ChartEl._chartsViews[0]._data._store._provider._data[param.treeAncestors[2].dataIndex].id
             }
-       
+     
                 }
     })
 ```
@@ -143,6 +148,5 @@ rich: {
            image:'data:image/png;base64,iVBORi, }
             // backgroundColor: '#1070FC'
            }
-       }    
+       }  
 ```
-
