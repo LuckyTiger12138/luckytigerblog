@@ -1,0 +1,32 @@
+<% const links = get_config_from_obj(widget, 'links'); %>
+<% if (links !== null) { %>
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            <%= __('widget.links') %>
+        </h3>
+        <ul class="menu-list">
+        <% for (let i in links) { %>
+            <li>
+                <a class="level is-mobile" href="<%- links[i] %>" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item"><%= i %></span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag"><%- get_domain(links[i]) %></span>
+                    </span>
+                </a>
+            </li>
+        <% } %>
+            <li style="background: linear-gradient(to right, #ff0000, #ff7400);">
+                <a href="https://pan.baidu.com/mall/product/detail/album?pid=2306493048218976258&from=shop&porigin=1004-200008-5" target="_blank" style=" color:white">视频教程：让你彻底理解 Git【共5讲】</a>
+            </li>
+            <li style="background: linear-gradient(to right, #7109aa, #cd0074);margin-top: 5px;">
+                <a href="https://pan.baidu.com/mall/product/detail/album?pid=2306493048218976257&from=shop&porigin=1004-200008-5" target="_blank" style=" color:white">2019年最新 Android 从入门到进阶全套视频教程【共 400 讲，正在更新】</a>
+            </li>
+        </ul>
+        </div>
+    </div>
+</div>
+<% } %>

@@ -1,0 +1,61 @@
+<%- _js(cdn('jquery', '3.3.1', 'dist/jquery.min.js')) %>
+<%- _js(cdn('moment', '2.22.2', 'min/moment-with-locales.min.js')) %>
+<script>moment.locale("<%= get_config('language', 'en') %>");</script>
+
+<% if (has_config('plugins')) { %>
+    <% for (let plugin in get_config('plugins')) { %>
+    <%- partial('plugin/' + plugin, { head: false, plugin: get_config('plugins')[plugin] }) %>
+    <% } %>
+<% } %>
+
+<%- _js('js/main', true) %>
+<script>
+    $(function(){
+        var showing = false;
+        var headEnter = false;
+        var mouseArea =  $("#knowledge-star");
+        var qrcode = $("#knowledge-qrcode");
+        var headimg = $("#blog-head-img");
+        //var originalSrc = headimg.attr("src");
+
+        function knowStarAnim(show){
+            if(show === showing) return;
+            showing = show;
+            qrcode.stop();
+            qrcode.toggle(1000);
+        }
+
+        mouseArea.mouseenter(function(){
+            knowStarAnim(true);  
+        });
+
+        mouseArea.mouseleave(function(){
+            knowStarAnim(false);
+        });
+
+        function headChangeAnim(enter){
+            if(enter === headEnter) return;
+            headEnter = enter;
+            if(enter){
+                $("img").attr("title", function() { return this.src });
+                $("img").attr("src", function(){
+                    if(this.width < 150){
+                        return "https://dp2px.com/images/jok-head.jpg";
+                    }else{
+                        return this.src;
+                    }
+                })
+            }else{
+                $("img").attr("src", function() { return this.title });
+                $("img").removeAttr("title");
+            }
+        }
+
+        headimg.mouseenter(function(){
+            headChangeAnim(true);
+        });
+        headimg.mouseleave(function(){
+            headChangeAnim(false);
+        });
+    });
+</script>

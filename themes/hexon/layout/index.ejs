@@ -1,0 +1,11 @@
+<%- _css('css/main_banner') %>
+<div id='banner' class='card'></div>
+<div class="tags hot-tags"></div>
+<%- _js('js/main_banner', true) %>
+<%- _js('js/hot-tags', true) %>
+<% page.posts.each(function(post){ %>
+    <%- partial('common/article', { post, index: true }) %>
+<% }); %>
+<% if (page.total > 1) { %>
+    <%- partial('common/paginator') %>
+<% } %>

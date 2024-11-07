@@ -1,0 +1,57 @@
+- class_name: 框架
+  flink_style: flexcard
+  hundredSuffix: ""
+  link_list:
+    - name: Hexo
+      link: https://hexo.io/zh-tw/
+      avatar: https://d33wubrfki0l68.cloudfront.net/6657ba50e702d84afb32fe846bed54fba1a77add/827ae/logo.svg
+      descr: 快速、简单且强大的网站框架
+    - name: anzhiyu主题
+      link: https://blog.anheyu.com/
+      avatar: https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg
+      descr: 生活明朗，万物可爱
+      siteshot: https://npm.elemecdn.com/anzhiyu-theme-static@1.1.6/img/blog.anheyu.com.jpg
+
+- class_name: 技术
+  flink_style: telescopic
+  hundredSuffix: 给资本家打工的命
+  link_list:
+    - name: 安知鱼
+      link: https://blog.anheyu.com/
+      avatar: https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg
+      descr: 生活明朗，万物可爱
+      siteshot: https://npm.elemecdn.com/anzhiyu-theme-static@1.1.6/img/blog.anheyu.com.jpg
+      color: vip
+      tag: 技术
+    - name: SerMs
+      link: https://blog.serms.top/
+      avatar: https://bu.dusays.com/2023/10/11/65269ea6226c8.png
+      descr: 代码如诗，细节成就极致，逻辑成就完美。
+      siteshot: https://bu.dusays.com/2023/10/11/65264d86ddebb.png
+      tag: 技术
+    - name: 夜雨柠檬
+      link: https://blog.yeyulemon.top/
+      avatar: https://imgbed.yeyulemon.top/uploads/652404e068dd8.png
+      descr: 生于忧患，死于安乐。
+      siteshot: https://imgbed.yeyulemon.top/uploads/6524bbe719a3a.png
+      tag: 技术
+    - name: dzbook
+      link: https://dzbook.top/
+      avatar: https://dzbook.top/upload/5b7d33fa-efba-4d33-82d0-0c80e18f3ccc.png
+      descr: 时长两年半全栈菜鸡。
+      siteshot: https://cdn.jsdelivr.net/gh/LuckyTiger12138/images//img/202405221017957.png
+      tag: 技术
+- class_name: 小伙伴
+  class_desc: 那些人，那些事
+  flink_style: anzhiyu
+  hundredSuffix: ""
+  link_list:
+    - name: 安知鱼
+      link: https://blog.anheyu.com/
+      avatar: https://npm.elemecdn.com/anzhiyu-blog-static@1.0.4/img/avatar.jpg
+      descr: 生活明朗，万物可爱
+      recommend: true
+    - name: 白雾茫茫丶
+      link: https://blog.xmwpro.com/
+      avatar: https://cyan-blog.oss-cn-shenzhen.aliyuncs.com/global/avatar.jpg
+      descr: 记录学习、生活和有趣的事
