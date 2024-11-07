@@ -9,7 +9,7 @@ tags:
 - 前端
 title: Echarts-树形关系图
 top_img: https://jsd.onmicrosoft.cn/gh/LuckyTiger12138/images//img/202311101346217.webp
-updated: '2024-11-07T11:52:55.595+08:00'
+updated: '2024-11-07T11:56:23.923+08:00'
 ---
 # Echarts
 
@@ -90,11 +90,11 @@ ChartEl.on("click", function (param) {
 
             var dataindexParent=param.treeAncestors[2].dataIndex
                 console.log(dataindexParent) //得到父级的dataindex
-              
+            
                 console.log(ChartEl._chartsViews[0]._data._rawData._data[dataindexParent])
 		ChartEl._chartsViews[0]._data._store._provider._data[param.treeAncestors[2].dataIndex].id
             }
-     
+   
                 }
     })
 ```
