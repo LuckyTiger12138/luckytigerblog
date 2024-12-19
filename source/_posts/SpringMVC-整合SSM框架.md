@@ -1,19 +1,12 @@
 ---
-abbrlink: ''
-categories:
-- 框架
-cover: https://jsd.onmicrosoft.cn/gh/LuckyTiger12138/images//img/202311111748508.png
-date: '2020-07-13T23:16:10+08:00'
-tags:
-- SpringMVC
-- 框架
-- spring
-- mybatis
-- 整合
 title: SpringMVC 整合SSM框架
+date: 2020-07-13 23:16:10
+cover: https://jsd.onmicrosoft.cn/gh/LuckyTiger12138/images//img/202311111748508.png
 top_img: https://jsd.onmicrosoft.cn/gh/LuckyTiger12138/images//img/202311101346217.webp
-updated: '2024-11-07T11:52:24.111+08:00'
+tags: ["SpringMVC","框架","spring","mybatis","整合"]
+categories: ["框架"]
 ---
+
 # 准备工作
 
 ## 环境要求
@@ -57,6 +50,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
 ## 基本环境搭建
 
 1. 新建一Maven项目！ssmbuild ， 添加web的支持
+
 2. 导入相关的pom依赖！
 
    ```
@@ -79,7 +73,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
            <artifactId>c3p0</artifactId>
            <version>0.9.5.2</version>
        </dependency>
-
+    
        <!--Servlet - JSP -->
        <dependency>
            <groupId>javax.servlet</groupId>
@@ -96,7 +90,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
            <artifactId>jstl</artifactId>
            <version>1.2</version>
        </dependency>
-
+    
        <!--Mybatis-->
        <dependency>
            <groupId>org.mybatis</groupId>
@@ -108,7 +102,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
            <artifactId>mybatis-spring</artifactId>
            <version>2.0.2</version>
        </dependency>
-
+    
        <!--Spring-->
        <dependency>
            <groupId>org.springframework</groupId>
@@ -122,6 +116,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        </dependency>
    </dependencies>
    ```
+
 3. Maven资源过滤设置
 
    ```xml
@@ -146,12 +141,17 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        </resources>
    </build>
    ```
+
 4. 建立基本结构和配置框架！
 
    - com.hwua.pojo
+
    - com.hwua.dao
+
    - com.hwua.service
+
    - com.hwua.controller
+
    - mybatis-config.xml
 
      ```xml
@@ -160,9 +160,10 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
              PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
              "http://mybatis.org/dtd/mybatis-3-config.dtd">
      <configuration>
-
+      
      </configuration>
      ```
+
    - applicationContext.xml
 
      ```xml
@@ -171,7 +172,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://www.springframework.org/schema/beans
              http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+      
      </beans>
      ```
 
@@ -185,7 +186,9 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
    jdbc.username=root
    jdbc.password=123456
    ```
+
 2. IDEA关联数据库
+
 3. 编写MyBatis的核心配置文件
 
    ```xml
@@ -201,9 +204,10 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        <mappers>
            <mapper resource="com/hwua/dao/BookMapper.xml"/>
        </mappers>
-
+    
    </configuration>
    ```
+
 4. 编写数据库对应的实体类 com.hwua.pojo.Books
 
    ```
@@ -217,16 +221,17 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        private int bookCounts;
        private String detail;   }
    ```
+
 5. 编写Dao层的 Mapper接口！
 
    ```java
    package com.kuang.dao;
-
+    
    import com.kuang.pojo.Books;
    import java.util.List;
-
+    
    public interface BookMapper {
-
+    
        //增加一个Book
        int addBook(Books book); 
        //根据id删除一个Book
@@ -235,10 +240,11 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        int updateBook(Books books);
        //根据id查询,返回一个Book
        Books queryBookById(int id);
-
+   
        //查询全部Book,返回list集合
        List<Books> queryAllBook();}
    ```
+
 6. 编写接口对应的 Mapper.xml 文件。需要导入MyBatis的包；
 
    ```xml
@@ -246,40 +252,41 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
    <!DOCTYPE mapper
            PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
            "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
+    
    <mapper namespace="com.hwua.dao.BookMapper">
-
+    
        <!--增加一个Book-->
        <insert id="addBook" parameterType="Books">
            insert into ssmbuild.books(bookName,bookCounts,detail)
            values (#{bookName}, #{bookCounts}, #{detail})
        </insert>
-
+    
        <!--根据id删除一个Book-->
        <delete id="deleteBookById" parameterType="int">
            delete from ssmbuild.books where bookID=#{bookID}
        </delete>
-
+    
        <!--更新Book-->
        <update id="updateBook" parameterType="Books">
            update ssmbuild.books
            set bookName = #{bookName},bookCounts = #{bookCounts},detail = #{detail}
            where bookID = #{bookID}
        </update>
-
+    
        <!--根据id查询,返回一个Book-->
        <select id="queryBookById" resultType="Books">
            select * from ssmbuild.books
            where bookID = #{bookID}
        </select>
-
+    
        <!--查询全部Book-->
        <select id="queryAllBook" resultType="Books">
            SELECT * from ssmbuild.books
        </select>
-
+    
    </mapper>
    ```
+
 7. 编写Service层的接口和实现类
 
    接口：
@@ -306,7 +313,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
    public class BookServiceImpl implements BookService { 
        //调用dao层的操作，设置一个set接口，方便Spring管理
        private BookMapper bookMapper;
-
+    
        public void setBookMapper(BookMapper bookMapper) {
            this.bookMapper = bookMapper;
        }
@@ -336,6 +343,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
 # Spring层
 
 1. 配置**Spring整合MyBatis**，我们这里数据源使用c3p0连接池；
+
 2. 我们去编写Spring整合Mybatis的相关的配置文件；spring-dao.xml
 
    ```xml
@@ -347,11 +355,11 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
            http://www.springframework.org/schema/beans/spring-beans.xsd
            http://www.springframework.org/schema/context
            https://www.springframework.org/schema/context/spring-context.xsd">
-
+    
        <!-- 配置整合mybatis -->
        <!-- 1.关联数据库文件 -->
        <context:property-placeholder location="classpath:database.properties"/>
-
+    
        <!-- 2.数据库连接池 -->
        <!--数据库连接池
            dbcp  半自动化操作  不能自动连接
@@ -390,6 +398,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        </bean>
    </beans>
    ```
+
 3. **Spring整合service层**
 
    ```xml
@@ -401,10 +410,10 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
        http://www.springframework.org/schema/context/spring-context.xsd">
-
+    
        <!-- 扫描service相关的bean -->
        <context:component-scan base-package="com.hwua.service" />
-
+    
        <!--BookServiceImpl注入到IOC容器中-->
        <bean id="BookServiceImpl" class="com.kuang.service.BookServiceImpl">
            <property name="bookMapper" ref="bookMapper"/>
@@ -427,7 +436,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
             version="4.0">
-
+    
        <!--DispatcherServlet-->
        <servlet>
            <servlet-name>DispatcherServlet</servlet-name>
@@ -466,6 +475,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        
    </web-app>
    ```
+
 2. **spring-mvc.xml**
 
    ```xml
@@ -480,13 +490,13 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        http://www.springframework.org/schema/context/spring-context.xsd
        http://www.springframework.org/schema/mvc
        https://www.springframework.org/schema/mvc/spring-mvc.xsd">
-
+    
        <!-- 配置SpringMVC -->
        <!-- 1.开启SpringMVC注解驱动 -->
        <mvc:annotation-driven />
        <!-- 2.静态资源默认servlet配置-->
        <mvc:default-servlet-handler/>
-
+    
        <!-- 3.配置jsp 显示ViewResolver视图解析器 -->
        <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
            <property name="viewClass" value="org.springframework.web.servlet.view.JstlView" />
@@ -497,6 +507,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        <context:component-scan base-package="com.hwua.controller" />
    </beans>
    ```
+
 3. **Spring配置整合文件，applicationContext.xml**
 
    ```xml
@@ -505,7 +516,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
           xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans.xsd">
-
+    
        <import resource="spring-dao.xml"/>
        <import resource="spring-service.xml"/>
        <import resource="spring-mvc.xml"/>
@@ -521,11 +532,11 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
    @Controller
    @RequestMapping("/book")
    public class BookController {
-
+    
        @Autowired
        @Qualifier("BookServiceImpl")
        private BookService bookService;
-
+    
        @RequestMapping("/allBook")
        public String list(Model model) {
            List<Books> list = bookService.queryAllBook();
@@ -534,6 +545,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        }
    }
    ```
+
 2. 编写首页 **index.jsp**
 
    ```jsp
@@ -560,13 +572,14 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        </style>
    </head>
    <body>
-
+    
    <h3>
        <a href="${pageContext.request.contextPath}/book/allBook">点击进入列表页</a>
    </h3>
    </body>
    </html>
    ```
+
 3. 书籍列表页面 **allbook.jsp**
 
    ```jsp
@@ -580,7 +593,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
    </head>
    <body>
-
+    
    <div class="container">
        <div class="row clearfix">
            <div class="col-md-12 column">
@@ -627,6 +640,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        </div>
    </div>
    ```
+
 4. BookController 类编写 ， 方法二：添加书籍
 
    ```java
@@ -634,7 +648,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
    public String toAddPaper() {
        return "addBook";
    }
-
+    
    @RequestMapping("/addBook")
    public String addPaper(Books books) {
        System.out.println(books);
@@ -642,12 +656,13 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        return "redirect:/book/allBook";
    }
    ```
+
 5. 添加书籍页面：**addBook.jsp**
 
    ```jsp
    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
    <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-
+    
    <html>
    <head>
        <title>新增书籍</title>
@@ -674,6 +689,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        </form>
    </div>
    ```
+
 6. BookController 类编写 ， 方法三：修改书籍
 
    ```java
@@ -684,7 +700,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        model.addAttribute("book",books );
        return "updateBook";
    }
-
+    
    @RequestMapping("/updateBook")
    public String updateBook(Model model, Books book) {
        System.out.println(book);
@@ -694,6 +710,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        return "redirect:/book/allBook";
    }
    ```
+
 7. 修改书籍页面  **updateBook.jsp**
 
    ```jsp
@@ -726,6 +743,7 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        </form>
    </div>
    ```
+
 8. BookController 类编写 ， 方法四：删除书籍
 
    ```java
@@ -735,4 +753,8 @@ INSERT  INTO `books`(`bookID`,`bookName`,`bookCounts`,`detail`)VALUES
        return "redirect:/book/allBook";
    }
    ```
+
 9. **配置Tomcat，进行运行！**
+
+   
+
